@@ -1,0 +1,51 @@
+﻿@{
+    ViewData["Title"] = "Все актёры";
+    var products = ViewBag.Products as List<Product>;
+}
+@model IEnumerable<Actor>
+
+<h3 class="p-2 bg-primary text-white text-center">Актёры</h3>
+
+<div class="text-center">
+    @Html.Partial("Pages", Model)
+</div>
+
+<div class="container">
+
+    <div class="row">
+        <div class="col fw-bold">Имя</div>
+       @*  <div class="col fw-bold">Фильмы</div> *@
+        <div class="col"></div>
+    </div>
+
+    @foreach (var actor in Model)
+    {
+        <div class="row p-2">
+            <div class="col">@actor.Name</div>
+            @* <div class="col">
+                @foreach (var productId in actor.ProductId ?? new List<int>())
+                {
+                    var product = products.FirstOrDefault(p => p.Id == productId);
+                    if (product != null)
+                    {
+                        <span>@product.Name</span>
+
+                        <br />
+                    }
+                }
+            </div> *@
+            <div class="col">
+                <form asp-action="DeleteActor" method="post">
+                    <input type="hidden" name="Id" value="@actor.Id" />
+                    <a asp-action="UpdateActor" asp-route-id="@actor.Id" class="btn btn-outline-primary">Редактировать</a>
+                    <button type="submit" class="btn btn-outline-danger">Удалить</button>
+                </form>
+            </div>
+        </div>
+    }
+
+    <div class="text-center p-2">
+        <a asp-action="UpdateActor" asp-route-id="0" class="btn btn-primary">Добавить</a>
+    </div>
+
+</div>

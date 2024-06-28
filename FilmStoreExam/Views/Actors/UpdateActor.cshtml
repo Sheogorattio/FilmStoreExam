@@ -1,0 +1,43 @@
+﻿@{
+    ViewData["Title"] = "Создание / Обновление актёра";
+}
+@model Actor
+
+<div class="row р-2">
+    <form asp-action="UpdateActor" method="post">
+    <div class="col-1"></div>
+    <div class="col">
+        <input asp-for="Name" class="form-control" />
+    </div>
+@*     <div class="col">
+        <div class="form-group">
+            <label asp-for="Product"></label>
+            <select class="form-control" asp-for="ProductId">
+                @if (Model.Id == 0)
+                {
+                    <option disabled selected>Выберите фильмы</option>
+                }
+                @{
+                    int i = 0;
+                }
+                @foreach (Product actor in ViewBag.Products)
+                {
+                    <option selected="@(Model.Product?[@i].Id == actor.Id)" value="@actor.Id">@actor.Name</option>
+                }
+            </select>
+        </div>
+    </div> *@
+
+    <div class="col-3">
+        @if (Model.Id == 0)
+        {
+            <button type="submit" class="btn btn-primary">Добавить</button>
+        }
+        else
+        {
+            <button type="submit" class="btn btn-outline-primary">Сохранить</button>
+            <a asp-action="Index" class="btn btn-outline-secondary">Отмена</a>
+        }
+    </div>
+    </form>
+</div>
